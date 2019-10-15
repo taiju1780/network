@@ -28,22 +28,22 @@ public class Move : MonoBehaviour
 
         if (Input.GetKey("w"))
         {
-            moveDir.z = 5;
+            moveDir.z = 1;
             charaCon.Move(moveDir);
         }
         if (Input.GetKey("s"))
         {
-            moveDir.z = -5;
+            moveDir.z = -1;
             charaCon.Move(moveDir);
         }
         if (Input.GetKey("d"))
         {
-            moveDir.x = 5;
+            moveDir.x = 1;
             charaCon.Move(moveDir);
         }
         if (Input.GetKey("a"))
         {
-            moveDir.x = -5;
+            moveDir.x = -1;
             charaCon.Move(moveDir);
         }
         charaCon.Move(moveheight * Time.deltaTime);
