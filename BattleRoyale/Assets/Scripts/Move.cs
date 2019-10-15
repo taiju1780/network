@@ -4,30 +4,43 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    public float speed = 3.0f;
-
+    private CharacterController charaCon;
+    private Vector3 moveDir;
    
     private void Start()
     {
+        charaCon = GetComponent<CharacterController>();
     }
     // Update is called once per frame
     void Update()
     {
+        if (charaCon.isGrounded)
+        {
+            if (Input.GetKey("x"))
+            {
+                moveDir.y = 20;
+            }
+        }
+
+        //重力
+        moveDir.y -= 10 * Time.deltaTime;
+
         if (Input.GetKey("w"))
         {
-            transform.position += transform.forward * speed * Time.deltaTime;
+            moveDir.z = 5;
         }
         if (Input.GetKey("s"))
         {
-            transform.position -= transform.forward * speed * Time.deltaTime;
+            moveDir.z = -5;
         }
         if (Input.GetKey("d"))
         {
-            transform.position += transform.right * speed * Time.deltaTime;
+            moveDir.x = 5;
         }
         if (Input.GetKey("a"))
         {
-            transform.position -= transform.right * speed * Time.deltaTime;
+            moveDir.x = -5;
         }
+        charaCon.Move(moveDir * Time.deltaTime);
     }
 }

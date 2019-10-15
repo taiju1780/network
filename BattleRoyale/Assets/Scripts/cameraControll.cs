@@ -24,14 +24,6 @@ public class cameraControll : MonoBehaviour
         float X_Rotation = Input.GetAxis("Mouse X");
         float Y_Rotation = Input.GetAxis("Mouse Y");
 
-        if(horRot.transform.rotation.eulerAngles.y > 75)
-        {
-            Y_Rotation = 75;
-        } 
-        if(horRot.transform.rotation.eulerAngles.y < -75)
-        {
-            Y_Rotation = -75;
-        }
         verRot.transform.Rotate(0, -X_Rotation * 2, 0);
         horRot.transform.Rotate(-Y_Rotation * 2, 0, 0);
     }
