@@ -5,6 +5,7 @@ using UnityEngine;
 public class Move : MonoBehaviour
 {
     private CharacterController charaCon;
+    private Vector3 moveheight;
     private Vector3 moveDir;
    
     private void Start()
@@ -18,7 +19,7 @@ public class Move : MonoBehaviour
         {
             if (Input.GetKey("x"))
             {
-                moveDir.y = 20;
+                moveheight.y = 20;
             }
         }
 
@@ -28,19 +29,23 @@ public class Move : MonoBehaviour
         if (Input.GetKey("w"))
         {
             moveDir.z = 5;
+            charaCon.Move(moveDir);
         }
         if (Input.GetKey("s"))
         {
             moveDir.z = -5;
+            charaCon.Move(moveDir);
         }
         if (Input.GetKey("d"))
         {
             moveDir.x = 5;
+            charaCon.Move(moveDir);
         }
         if (Input.GetKey("a"))
         {
             moveDir.x = -5;
+            charaCon.Move(moveDir);
         }
-        charaCon.Move(moveDir * Time.deltaTime);
+        charaCon.Move(moveheight * Time.deltaTime);
     }
 }
