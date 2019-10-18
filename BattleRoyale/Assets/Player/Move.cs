@@ -58,7 +58,7 @@ public class Move : MonoBehaviour
            
         }
 
-         chara.transform.rotation = cam.transform.rotation;
+        chara.transform.rotation = cam.transform.rotation;
 
         //重力
         moveDir.y -= gravity * Time.deltaTime;

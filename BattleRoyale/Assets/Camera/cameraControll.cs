@@ -5,6 +5,8 @@ using UnityEngine;
 public class cameraControll : MonoBehaviour
 {
     public GameObject player;
+
+    //カメラとプレイヤーとの差分
     private Vector3 offset;
 
     public Transform verRot;
@@ -19,6 +21,11 @@ public class cameraControll : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
+
         transform.position = player.transform.position + offset; 
 
         float X_Rotation = Input.GetAxis("Mouse X");
