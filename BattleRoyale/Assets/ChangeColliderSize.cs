@@ -5,7 +5,8 @@ using UnityEngine;
 public class ChangeColliderSize : MonoBehaviour
 {
     CapsuleCollider area;
-    float rad;
+    [SerializeField]
+    Vector3 center;
     public float timeOut;
     private float timeElapsed;
 
@@ -15,6 +16,7 @@ public class ChangeColliderSize : MonoBehaviour
     void Start()
     {
         area = GetComponent<CapsuleCollider>();
+        center = new Vector3(Random.Range(0.1f, 1.0f), Random.Range(0.1f, 1.0f), Random.Range(0.1f, 1.0f)).normalized * area.radius;
         timeflag = false;
     }
 
@@ -24,11 +26,13 @@ public class ChangeColliderSize : MonoBehaviour
         timeElapsed += Time.deltaTime;
         if (timeflag == true)
         {
-            area.radius -= 0.01f;
+            area.radius -= Time.deltaTime;
+            area.center = Vector3.MoveTowards(area.center,center, Time.deltaTime);
 
         }
         if (timeElapsed >= timeOut)
         {
+            center = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized * area.radius;
             timeElapsed = 0.0f;
             timeflag = !timeflag;
         }
