@@ -16,7 +16,7 @@ public class ChangeColliderSize : MonoBehaviour
     void Start()
     {
         area = GetComponent<CapsuleCollider>();
-        center = new Vector3(Random.Range(0.1f, 1.0f), Random.Range(0.1f, 1.0f), Random.Range(0.1f, 1.0f)).normalized * area.radius;
+        center = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized * area.radius;
         timeflag = false;
     }
 
@@ -26,8 +26,8 @@ public class ChangeColliderSize : MonoBehaviour
         timeElapsed += Time.deltaTime;
         if (timeflag == true)
         {
-            area.radius -= Time.deltaTime;
-            area.center = Vector3.MoveTowards(area.center,center, Time.deltaTime);
+            area.radius -= Time.deltaTime * 10;
+            area.center = Vector3.MoveTowards(area.center,center, Time.deltaTime*10);
 
         }
         if (timeElapsed >= timeOut)
@@ -36,6 +36,11 @@ public class ChangeColliderSize : MonoBehaviour
             timeElapsed = 0.0f;
             timeflag = !timeflag;
         }
+    }
+
+    private void OnTriggerExit(Collider player)
+    {
+        //後から実装
     }
 }
 
