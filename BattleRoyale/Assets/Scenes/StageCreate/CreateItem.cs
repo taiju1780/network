@@ -9,7 +9,7 @@ public class CreateItem : MonoBehaviour
         "Prefab/test2",
         "Prefab/test3"
     };
-    private List<GameObject> ItemList = new List<GameObject>();
+    public List<GameObject> ItemList = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -21,13 +21,16 @@ public class CreateItem : MonoBehaviour
     void Update()
     {
         Vector3 vec =new Vector3(0, 0, 0);
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey("e"))
         {
             ItemSpawn(vec, 0);
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey("f"))
         {
-            ItemDelete(ItemList[0]);
+            if (ItemList.Count!=0)
+            {
+                ItemDelete(ItemList[0]);
+            }
         }
     }
 
@@ -35,20 +38,21 @@ public class CreateItem : MonoBehaviour
     {
         GameObject prefab = (GameObject)Resources.Load(ItemPath[itemNo]);
 
-        ItemList.Add(Instantiate(prefab, pos, Quaternion.identity));
+        ItemList.Add(Instantiate(prefab, new Vector3(Random.Range(-50.0f, 50.0f), 0, Random.Range(-50.0f, 50.0f)), Quaternion.identity));
 
         return true;
     }
 
     bool ItemDelete(GameObject obj)
     {
-        for(int i = 0;i < ItemList.Count;++i)
+        if (ItemList.IndexOf(obj)!=-1)
         {
-            if(i.Equals(obj))
+            if (ItemList.Remove(obj))
             {
-                ItemList.Remove(obj);
+                Destroy(obj);
+                return true;
             }
         }
-        return true;
+        return false;
     }
 }
